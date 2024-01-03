@@ -50,10 +50,12 @@ function writePassword() {
 
     if (criteriaValidation) {
       // if (lowerCase OR upperCase OR numeric OR specialCharacters) // Don't need length condition because already required to enter this loop
+      if (lowercase || uppercase || numeric || specialCharacters) {
         // Run password generator function
         passwordGenerator();
-      // else
-        // window.alert("Sorry, we were unable to generate a password for you! At least one character type must be selected.")
+      } else {
+        window.alert("Sorry, we were unable to generate a password for you! At least one character type must be selected.")
+      }
     } else {
       window.alert("Sorry, it seems we were not on the same page about your password criteria! Please click 'Generate Password' to reselect your criteria.");
     }
@@ -62,7 +64,7 @@ function writePassword() {
   }
 
 
- // passwordText.value = password; // For the moment, I have commented this out until I solidify 
+ // passwordText.value = password; // For the moment, I have commented this out until I solidify
 
 }
 
