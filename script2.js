@@ -24,6 +24,15 @@ function writePassword() {
    + "\n"
    + "If yes, select 'OK'; no, select 'Cancel'.");
 
+   // Ask users to confirm their password criteria choices.=
+   var criteriaConfirmation = window.confirm("Please confirm your password criteria:" + "\n"
+    + "\n" 
+    + "Password length: " + length + " characters" + "\n"
+    + "Lowercase characters: " + lowercase + "\n"
+    + "Uppercase characters: " + uppercase + "\n"
+    + "Numeric characters: " + numeric + "\n"
+    + "Special characters: " + specialCharacters);
+
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
 
