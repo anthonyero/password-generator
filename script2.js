@@ -24,7 +24,7 @@ function writePassword() {
    + "\n"
    + "If yes, select 'OK'; no, select 'Cancel'.");
 
-   // Ask users to confirm their password criteria choices.=
+   // Ask users to confirm their password criteria choices.
    var criteriaConfirmation = window.confirm("Please confirm your password criteria:" + "\n"
     + "\n" 
     + "Password length: " + length + " characters" + "\n"
@@ -36,21 +36,49 @@ function writePassword() {
 
   // Once a participant has confirmed their selection, validate that they have an appropriate password length and have selected at least one character type   
   if (criteriaConfirmation) {
-    // if (lowerCase OR upperCase OR numeric OR specialCharacters) // Don't need length condition because already required to enter this loop
-    if ((length >= 8 && length <= 128 ) && (lowercase || uppercase || numeric || specialCharacters)) {
+    if ((length >= 8 && length <= 128) && (lowercase || uppercase || numeric || specialCharacters)) {
       // Run password generator function
-      window.alert("Validated")
+      var password = generatePassword(); // The returned value will be assigned to `password`
     } else {
       window.alert("Sorry, we were unable to generate a password for you! Please ensure you have selected a password length of at least 8 and no more than 128, and at least one character type.")
     }
   }
   
-  var password = generatePassword();
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
 
-}
+  // Declare generatePassword function
+  function generatePassword () {
+    // Define an array with available character options based on user's selected criteria
+    selectedUserOptions = []
+    if (numeric) {
+      selectedUserOptions = selectedUserOptions.concat(numericCharacterOptions);
+    }
 
+    if (lowercase) {
+      selectedUserOptions = selectedUserOptions.concat(lowercaseCharacterOptions);
+    }
+
+    if (uppercase) {
+      selectedUserOptions = selectedUserOptions.concat(uppercaseCharacterOptions);
+    }
+
+    if (specialCharacters) {
+      selectedUserOptions = selectedUserOptions.concat(specialCharacterOptions);
+    }
+
+    // Declare local password string and randomly generate values
+    var passwordString = "";
+
+    for (let i = 0; i < length; i++) {
+      passwordString += selectedUserOptions[Math.floor(Math.random() * selectedUserOptions.length)]; // Serves same function as passwordString = passwordString + random
+    }
+
+    return passwordString;
+  }
+
+}
+  
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
