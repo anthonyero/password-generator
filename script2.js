@@ -33,6 +33,18 @@ function writePassword() {
     + "Numeric characters: " + numeric + "\n"
     + "Special characters: " + specialCharacters);
 
+
+  // Once a participant has confirmed their selection, validate that they have an appropriate password length and have selected at least one character type   
+  if (criteriaConfirmation) {
+    // if (lowerCase OR upperCase OR numeric OR specialCharacters) // Don't need length condition because already required to enter this loop
+    if ((length >= 8 && length <= 128 ) && (lowercase || uppercase || numeric || specialCharacters)) {
+      // Run password generator function
+      window.alert("Validated")
+    } else {
+      window.alert("Sorry, we were unable to generate a password for you! Please ensure you have selected a password length of at least 8 and no more than 128, and at least one character type.")
+    }
+  }
+  
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
 
